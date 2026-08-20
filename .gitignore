@@ -1,0 +1,29 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local test outputs
+video-subtitle-skill-test/
+analysis/
+output/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.webm
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

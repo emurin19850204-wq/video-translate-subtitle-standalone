@@ -1,0 +1,40 @@
+name: Validate portable skill
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check Python syntax
+        run: |
+          python -m py_compile scripts/validate_srt.py
+          python -m py_compile scripts/transcript_to_srt.py
+
+      - name: Convert transcript JSON to SRT
+        run: python scripts/transcript_to_srt.py tests/fixtures/translated_segments.json /tmp/generated.srt
+
+      - name: Validate generated SRT
+        run: python scripts/validate_srt.py /tmp/generated.srt
+
+      - name: Validate fixture SRT
+        run: python scripts/validate_srt.py tests/fixtures/valid.srt
+
+      - name: Check shell syntax
+        run: |
+          bash -n setup.sh
+          bash -n scripts/analyze_video.sh
+          bash -n scripts/burn_japanese_subtitles.sh

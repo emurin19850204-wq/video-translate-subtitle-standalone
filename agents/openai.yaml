@@ -1,0 +1,6 @@
+interface:
+  display_name: "Video Translate Subtitle"
+  short_description: "Translate English video speech into Japanese subtitles and deliver an MP4"
+  default_prompt: "Use $video-translate-subtitle to transcribe English speech, create Japanese SRT subtitles, burn them into an uncropped MP4, and report black/white screens and scene changes."
+policy:
+  allow_implicit_invocation: true
